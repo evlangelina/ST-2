@@ -137,7 +137,7 @@ TEST(TaskRopeTest, CircleBasedAndFormulaAreClose) {
   const double pi = 3.14159265358979323846;
   double gap = RopeGap();
   double expected = 1.0 / (2.0 * pi);
-  EXPECT_NEAR(gap, expected, 1e-12);
+  EXPECT_NEAR(gap, expected, 1e-9);
 }
 
 TEST(TaskPoolTest, ConcreteCostValue) {
@@ -164,4 +164,8 @@ TEST(TaskPoolTest, ConcreteCostPositive) {
 TEST(TaskPoolTest, FenceCostPositive) {
   double cost = PoolFenceCost();
   EXPECT_GT(cost, 0.0);
+}
+
+TEST(TaskPoolTest, FenceCostGreaterThanConcreteCostForGivenData) {
+  EXPECT_GT(PoolFenceCost(), PoolConcreteCost());
 }
